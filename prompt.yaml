@@ -1,0 +1,375 @@
+##########################################################################################################
+# Prompts for Haskell / Stack project structure generation
+
+structure_prompt: |
+  You are designing a Haskell project using Stack.
+
+  Project requirements:
+  {{project_description}}
+
+  Design a maintainable Haskell project structure that satisfies the requirements.
+
+  Return only valid YAML. Do not wrap the YAML in Markdown code fences and do not include explanations.
+
+  Use this schema:
+  type: Project
+  name: <project-name>
+  description: <project-description>
+  children:
+    - type: Directory
+      name: app
+      description: <description>
+      children:
+        - type: Module
+          name: Main
+          description: <responsibility>
+          children: []
+    - type: Directory
+      name: src
+      description: <description>
+      children:
+        - type: Module
+          name: <Haskell.Module.Name>
+          description: <responsibility>
+          children:
+            - type: Type
+              name: <TypeName>
+              description: <purpose and important invariants>
+            - type: Method
+              name: <functionName>
+              description: <observable behavior, inputs, outputs, and relevant error cases>
+              typeSignature: "<valid Haskell type signature>"
+
+  Design requirements:
+  - Use idiomatic Haskell module names: each component of a module name must begin with an uppercase letter.
+  - Make module names correspond to their source paths. For example, Foo.Bar must be stored as src/Foo/Bar.hs.
+  - Keep the executable entry point in app/Main.hs.
+  - Organize modules according to their responsibilities and the project's Clean Architecture boundaries.
+  - Keep domain logic independent of IO, YAML libraries, HTTP clients, LLM providers, and filesystem operations.
+  - Put external-system interactions behind clearly defined interfaces or repository abstractions.
+  - Give each module a cohesive responsibility. Avoid both oversized modules and unnecessary one-function modules.
+  - Describe public functions and types that other modules or tests need to use.
+  - Use valid Haskell type signatures, including qualified types where necessary. Enclose every typeSignature value in double quotes.
+  - Include enough behavioral detail for later generation of implementation code and Hspec tests.
+  - Do not include test modules in src or app. Tests are generated separately under test.
+  - Do not generate Haskell implementation code.
+  - Do not invent requirements that are not implied by the project description.
+
+structure_prompt_Re: |
+  You are revising the structure of an existing Haskell Stack project.
+
+  Project requirements:
+  {{project_description}}
+
+  Current project structure:
+  {{current_structure}}
+
+  Revise the structure only where necessary to satisfy the requirements.
+
+  Return only the complete, valid YAML structure. Do not wrap it in Markdown code fences and do not include explanations.
+
+  Follow these rules:
+  - Preserve existing modules, types, functions, and names when they remain appropriate.
+  - Add missing modules or declarations when required.
+  - Remove or change elements only when they conflict with the requirements or are clearly unnecessary.
+  - Keep module names consistent with Haskell naming conventions and source paths. For example, Foo.Bar corresponds to src/Foo/Bar.hs.
+  - Keep the executable entry point in app/Main.hs.
+  - Respect Clean Architecture: domain logic must not depend on infrastructure details.
+  - Keep external IO and integrations behind appropriate interfaces.
+  - Keep test modules out of src and app; tests are generated separately under test.
+  - Every Method must have a valid Haskell type signature enclosed in double quotes.
+  - Preserve the schema: Project, Directory, Module, Type, and Method nodes.
+  - Do not generate Haskell implementation code.
+  - Do not add requirements that are absent from the project description.
+
+##########################################################################################################
+# Prompts for acceptance-test generation
+
+acceptanceTest_prompt: |
+  You are writing executable acceptance tests for a Haskell application built with Stack.
+
+  Acceptance-test requirements:
+  {{acceptance_tests}}
+
+  Project structure and public interfaces:
+  {{structure_file}}
+
+  Generate acceptance tests using Hspec.
+
+  Requirements:
+  - Test the externally observable behavior of the application from the user's perspective.
+  - Exercise the application's command-line entry point when the requirement describes command-line behavior.
+  - Do not test private implementation details or duplicate unit tests for individual functions.
+  - Use realistic inputs and verify meaningful outputs, generated files, exit behavior, or other observable effects.
+  - Cover normal cases, relevant boundary cases, and expected failure cases.
+  - Use temporary directories and isolated test data for filesystem-related tests. Do not modify the developer's working files.
+  - Do not assume network access or a running external service. If an external dependency is required, use an appropriate test boundary or state the required test setup explicitly.
+  - Use only dependencies available to the generated Stack project. Do not silently introduce new packages.
+  - The test code must be complete Haskell source that can be compiled and run without manual completion.
+  - Use Hspec conventions such as spec, describe, it, and shouldBe / shouldSatisfy where appropriate.
+  - Do not invent command-line options, output formats, or APIs that are not specified by the requirements or project structure.
+  - If a requirement is too ambiguous to test, do not fabricate expected behavior; make the limitation explicit in a Haskell comment.
+
+  Return one Haskell code block containing the complete test module. Do not include explanations outside the code block.
+
+acceptanceTest_prompt_Re: |
+  You are revising an existing Hspec acceptance-test module for a Haskell application built with Stack.
+
+  Acceptance-test requirements:
+  {{acceptance_tests}}
+
+  Project structure and public interfaces:
+  {{structure_file}}
+
+  Current test source:
+  {{current_testcode}}
+
+  Update the test module so that it verifies the requirements accurately.
+
+  Requirements:
+  - Preserve valid existing tests unless they are incorrect, redundant, or inconsistent with the requirements.
+  - Test externally observable application behavior, not private implementation details.
+  - Exercise the command-line entry point when appropriate.
+  - Cover normal cases, relevant boundary cases, and expected failure cases.
+  - Keep filesystem tests isolated with temporary directories and test data.
+  - Do not assume network access or running external services.
+  - Use only dependencies available to the generated Stack project; do not silently introduce packages.
+  - Do not invent command-line options, output formats, or APIs.
+  - Ensure the result is a complete, compilable Hspec module.
+  - Explain unresolved ambiguity only in Haskell comments.
+
+  Return one Haskell code block containing the complete updated test module. Do not include explanations outside the code block.
+
+##########################################################################################################
+# Prompts for per-module unit-test generation
+
+moduleTest_prompt: |
+  You are generating unit tests for one Haskell module in a Stack project.
+  The test framework is Hspec.
+
+  Project structure and module declarations:
+  {{structure_file}}
+
+  Target module:
+  {{module_name}}
+
+  Generate a test module named {{module_name}}Spec.
+
+  Requirements:
+  - Import the target module using its exact Haskell module name.
+  - Test the target module's publicly exposed functions and types described in the project structure.
+  - Use the declared Haskell type signatures as the source of truth for function arguments and results.
+  - Test observable behavior and documented invariants, not implementation details.
+  - Include meaningful normal cases, boundary cases, and error cases where the API supports them.
+  - For pure functions, prefer direct input/output assertions using Hspec expectations such as shouldBe, shouldSatisfy, and shouldThrow only when exceptions are part of the documented behavior.
+  - For IO functions, use isolated temporary resources and avoid changing the user's working directory or files.
+  - Do not call real external services or depend on network access. Test through the module's public abstractions and available test seams.
+  - Do not use undefined, error, TODO placeholders, or pseudocode to make the test compile.
+  - Do not invent functions, constructors, record fields, or behavior that are absent from the structure.
+  - Do not test functions that are not public or are not described in the supplied structure.
+  - Use only packages already available to the project. Do not add dependencies.
+  - If the structure does not provide enough information to write a meaningful assertion, add a concise Haskell comment identifying the missing information rather than inventing behavior.
+  - The result must be a complete Haskell source module.
+
+  Naming and discovery:
+  - The Haskell module declaration must be exactly: module {{module_name}}Spec (spec) where
+  - The file must be suitable for the path test/{{module_name}}Spec.hs, with dots in the module name represented as directory separators. For example, Foo.BarSpec belongs in test/Foo/BarSpec.hs.
+  - Export spec so that hspec-discover can discover the tests.
+  - Define spec :: Spec and organize tests with describe and it.
+  - Do not define main in this module; the test runner is provided by hspec-discover.
+
+  Return one Haskell code block containing the complete test module. Do not include explanations outside the code block.
+
+moduleTest_prompt_Re: |
+  You are revising an existing Hspec unit-test module for a Haskell Stack project.
+
+  Project structure and module declarations:
+  {{structure_file}}
+
+  Target module:
+  {{module_name}}
+
+  Current test source:
+  {{current_testcode}}
+
+  Update the test module named {{module_name}}Spec.
+
+  Requirements:
+  - Keep the exact module declaration: module {{module_name}}Spec (spec) where
+  - Import the target module using its exact Haskell module name.
+  - Test only publicly exposed functions and types described in the project structure.
+  - Use the declared Haskell type signatures as the source of truth.
+  - Preserve correct existing tests and improve or replace tests that are incorrect, incomplete, or inconsistent with the current structure.
+  - Test observable behavior and documented invariants rather than implementation details.
+  - Include meaningful normal cases, boundary cases, and documented error cases where appropriate.
+  - Keep IO tests isolated; do not modify the user's working files or depend on real external services.
+  - Do not invent APIs, constructors, record fields, or expected behavior.
+  - Do not use undefined, error, TODO placeholders, or pseudocode.
+  - Use only dependencies already available to the project.
+  - Ensure the result is a complete Haskell source module exporting spec :: Spec.
+  - Do not define main; hspec-discover supplies the test runner.
+
+  Naming and discovery:
+  - The module name must remain {{module_name}}Spec.
+  - The corresponding path is test/{{module_name}}Spec.hs, replacing dots in the module name with directory separators. For example, Foo.BarSpec belongs in test/Foo/BarSpec.hs.
+
+  Return one Haskell code block containing the complete updated test module. Do not include explanations outside the code block.
+
+##########################################################################################################
+# Prompts for main-module implementation generation
+
+main_Module_Implementation_Prompt: |
+  You are implementing the executable entry point of a Haskell application built with Stack.
+  The project follows Clean Architecture and uses Hspec for acceptance and unit tests.
+
+  Project requirements:
+  {{project_description}}
+
+  Project structure and module interfaces:
+  {{structure_file}}
+
+  Acceptance tests:
+  {{acceptance_testcode}}
+
+  Implement the Main module in app/Main.hs.
+
+  Requirements:
+  - Treat the project requirements, declared module interfaces, and acceptance tests as the sources of truth.
+  - Implement only the executable entry point and its orchestration responsibilities. Keep business rules in their appropriate application or domain modules.
+  - Parse and validate command-line arguments only according to behavior specified by the requirements and tests. Do not invent options or defaults.
+  - Invoke the appropriate application-level functions in the correct order and handle their documented results and errors.
+  - Keep dependencies pointing inward according to Clean Architecture. Main may assemble infrastructure dependencies and invoke application logic, but domain logic must not depend on Main or infrastructure.
+  - Use the exact module names, exported functions, constructors, and type signatures declared in the project structure.
+  - Do not duplicate functionality that belongs to another module.
+  - Handle IO and errors explicitly and consistently with the declared interfaces.
+  - Use idiomatic, compilable Haskell. Include all required imports and type signatures where appropriate.
+  - Do not use undefined, error, TODO placeholders, pseudocode, or fabricated APIs.
+  - Do not add package dependencies or change Stack/Cabal configuration unless explicitly requested.
+  - Do not weaken, bypass, or hard-code results to satisfy acceptance tests. Implement the required behavior.
+  - If the requirements, interfaces, or tests conflict or omit information essential to a correct implementation, do not guess. Add a concise Haskell comment identifying the unresolved issue.
+
+  Output requirements:
+  - Return the complete contents of app/Main.hs as one Haskell code block.
+  - Do not include Markdown explanations outside the code block.
+  - Do not output other project files.
+
+main_Module_Implementation_Prompt_Re: |
+  You are revising the executable entry point of a Haskell application built with Stack.
+  The project follows Clean Architecture and uses Hspec.
+
+  Project requirements:
+  {{project_description}}
+
+  Project structure and module interfaces:
+  {{structure_file}}
+
+  Acceptance tests:
+  {{acceptance_testcode}}
+
+  Current Main.hs implementation:
+  {{current_implementation}}
+
+  Latest build or acceptance-test results (if available):
+  {{test_results}}
+
+  Revise app/Main.hs to correct the implementation and satisfy the requirements and acceptance tests.
+
+  Requirements:
+  - Preserve correct existing behavior and make the smallest coherent changes necessary.
+  - Use the project requirements, declared interfaces, and acceptance tests as the sources of truth.
+  - Keep Main focused on executable startup, command-line interaction, dependency assembly, and application orchestration.
+  - Do not move domain or application business logic into Main.
+  - Use only declared modules, exported functions, constructors, and type signatures. Do not invent APIs.
+  - Do not remove, skip, weaken, or hard-code around failing acceptance tests.
+  - Address the underlying cause of failures rather than merely changing output to match an assertion.
+  - Do not add dependencies or modify unrelated files.
+  - If test results indicate a failure outside Main.hs, do not make an unjustified change to Main.hs; identify the mismatch in a Haskell comment only if it affects the returned implementation.
+  - Return complete, compilable Haskell source without undefined, error, TODO placeholders, or pseudocode.
+
+  Output requirements:
+  - Return the complete revised contents of app/Main.hs as one Haskell code block.
+  - Do not include explanations outside the code block or output other files.
+
+##########################################################################################################
+# Prompts for module implementation generation
+
+module_Implementation_Prompt: |
+  You are implementing one Haskell module in a Stack project that follows Clean Architecture.
+  The project uses Hspec, and its development process is test-oriented: the module's tests are provided as the behavioral contract for the implementation.
+
+  Project requirements:
+  {{project_description}}
+
+  Project structure and module interfaces:
+  {{structure_file}}
+
+  Target module:
+  {{module_name}}
+
+  Hspec tests for the target module:
+  {{module_testcode}}
+
+  Implement the target module in its corresponding source file under src/.
+
+  Requirements:
+  - Treat the target module's declared types, function names, and type signatures in the project structure as authoritative.
+  - Treat the supplied Hspec tests as an executable description of expected behavior, while also respecting the broader project requirements.
+  - Implement every declared public function and type required by the target module. Do not omit required definitions.
+  - Make the implementation satisfy the supplied tests through correct behavior. Do not hard-code test inputs or expected outputs, bypass assertions, or weaken the tests.
+  - Implement behavior generally, including relevant boundary and error cases described by the requirements, structure, and tests.
+  - Follow Clean Architecture dependency rules. Domain modules must not depend on infrastructure modules or external frameworks. Infrastructure modules may implement interfaces defined in inner layers.
+  - Use only modules, types, constructors, and functions that are declared in the project structure or available from the project's existing dependencies. Do not invent APIs.
+  - Keep the module cohesive and avoid unrelated functionality.
+  - Prefer pure functions for domain logic. Use IO only when required by the declared type signature and responsibility.
+  - Handle errors according to the declared types and documented behavior. Do not silently discard failures.
+  - Use idiomatic Haskell, explicit imports, and readable pattern matching. Add type signatures for top-level definitions.
+  - Do not use undefined, error, TODO placeholders, or pseudocode.
+  - Do not add package dependencies or change Stack/Cabal configuration unless explicitly requested.
+  - Do not modify tests. If a test contradicts the project requirements or the declared interface, do not work around the contradiction; add a concise Haskell comment identifying the issue in the implementation output only when necessary.
+  - The result must be complete, compilable Haskell source.
+
+  Output requirements:
+  - Return the complete source code for the target module as one Haskell code block.
+  - The module declaration and file path must correspond to {{module_name}}.
+  - Do not include explanations outside the code block or output other files.
+
+module_Implementation_Prompt_Re: |
+  You are revising one Haskell module in a Stack project that follows Clean Architecture.
+  The project uses Hspec and a test-oriented development process.
+
+  Project requirements:
+  {{project_description}}
+
+  Project structure and module interfaces:
+  {{structure_file}}
+
+  Target module:
+  {{module_name}}
+
+  Hspec tests for the target module:
+  {{module_testcode}}
+
+  Current implementation:
+  {{current_implementation}}
+
+  Latest build and test results:
+  {{test_results}}
+
+  Revise the target module to correct defects and satisfy the requirements, interfaces, and tests.
+
+  Requirements:
+  - Preserve correct existing behavior and make the smallest coherent changes necessary.
+  - Keep all declared public function names and type signatures unchanged unless the supplied project structure has explicitly been updated.
+  - Use the supplied Hspec tests as the behavioral contract, together with the broader project requirements.
+  - Fix the underlying implementation defects indicated by failing tests or compiler errors. Do not bypass, weaken, delete, or rewrite tests to make the suite pass.
+  - Do not hard-code test cases or special-case known test inputs unless that behavior is explicitly required by the specification.
+  - Preserve Clean Architecture dependency rules and the module's single, cohesive responsibility.
+  - Do not introduce undeclared APIs, unrelated functionality, new package dependencies, or configuration changes.
+  - Do not use undefined, error, TODO placeholders, or pseudocode.
+  - If a reported failure is caused by an incorrect test, a conflicting specification, or another module, do not conceal it with an unjustified change. Identify the mismatch in a concise Haskell comment only if necessary.
+  - Return complete, compilable Haskell source with explicit imports and type signatures for top-level definitions.
+
+  Output requirements:
+  - Return the complete revised source code for the target module as one Haskell code block.
+  - Keep the module declaration and file path consistent with {{module_name}}.
+  - Do not include explanations outside the code block or output other files.

@@ -54,6 +54,7 @@ structure_prompt: |
               typeSignature: ...
 
   If needed, you can create new directory to manage modules.
+  Do not consider about test.
   All type signatures must be enclosed in quotation marks.
   Do not create the final code.
   Avoid using natural language explanations."
@@ -80,10 +81,11 @@ acceptanceTest_prompt: |
   
   {{acceptance_tests}}
 
-  Generate the test code in Hspec to verify if the system is correct. 
+  Generate the test code to verify if the system is correct. 
+  Create the code in Hspec.
   The test code must execute the main command of the system.
   The test code must be executable and self-contained, i.e., not to be completed by a developer.
-  Represent each acceptance criterion as a separate test case or test function.
+  Each acceptance test represents a method.
   Do not create the final code.
   Provide the code within a code block. Avoid using natural language explanations."
 
@@ -92,14 +94,15 @@ acceptanceTest_prompt_Re: |
   
   {{acceptance_tests}}
 
-  Update the test code in Hspec to verify if the system is correct. 
+  Update the test code to verify if the system is correct. 
+  Create the code in Hspec.
   The test code must execute the main command of the system.
   The test code must be executable and self-contained, i.e., not to be completed by a developer.
   Consider that the content of the current file is:
 
   {{current_testcode}}
 
-  Represent each acceptance criterion as a separate test case or test function.
+  Each acceptance test represents a method.
   Do not create the final code.
   Provide the code within a code block. Avoid using natural language explanations."
 
@@ -111,7 +114,8 @@ moduleTest_prompt: |
   
   {{structure_file}}
 
-  Create unit tests in Hspec named {{module_name}}Spec for the module {{module_name}}.
+  Create unit tests named {{module_name}}Spec for the module {{module_name}}.
+  Create the code in Hspec.
   The test code must execute the publicly exposed functions and types.
   The test code must be executable and self-contained, i.e., not to be completed by a developer.
   Do not create the final code.
@@ -122,10 +126,11 @@ moduleTest_prompt_Re: |
   
   {{structure_file}}
 
-  Update unit tests in Hspec named {{module_name}}Spec for the module {{module_name}} given the current file below:
+  Update unit tests named {{module_name}}Spec for the module {{module_name}} given the current file below:
   
   {{current_testcode}}
 
+  Create the code in Hspec.
   The test code must execute the publicly exposed functions and types.
   The test code must be executable and self-contained, i.e., not to be completed by a developer.
   Do not create the final code.

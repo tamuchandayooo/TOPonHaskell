@@ -1,4 +1,4 @@
-model: qwen2.5-coder:3b
+model: "qwen2.5-coder:3b"
 
 description:
   "The program consists of a personal library of BibTEX entries. 

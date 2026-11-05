@@ -1,10 +1,12 @@
 module Application.App where
 
 import qualified Data.Text.IO as TIO
-import System.Directory (withCurrentDirectory)
+import System.Directory (withCurrentDirectory, doesFileExist)
 import System.Exit (exitSuccess, exitFailure)
+import System.FilePath ((</>))
 
 import Domain.ProjectContext
+import Application.CreateTemplate
 import Application.Verify
 import Application.Structure
 import Application.TestGen
@@ -15,6 +17,9 @@ import Infrastructure.ReadYaml
 run :: FilePath -> IO ()
 run root = do
     
+    -- Create template files if there aren't main.yaml or prompt.yaml 
+    createTemplate root
+
     -- Set argument path as current directory
     withCurrentDirectory root $ do
 
@@ -40,7 +45,6 @@ run root = do
                     }
                 (Left err, _)            -> Left  err
                 (_, Left err)            -> Left  err
-        -- putStrLn $ "[DEBUG]" ++ show context
 
 
 
@@ -55,12 +59,11 @@ run root = do
                 exitFailure
             Right cxt -> do
                 verify $ genStructure cxt
-        
+    
         -- Create structure tree
         -- input  : structure file
         -- output : StructureTree (ADT)
         tree <- parseFromStructureTree structureFilename
-        putStrLn $ "[DEBUG]" ++ show tree
 
         -- Create stack project and file structure
         -- input  : StructureTree (ADT)
@@ -75,9 +78,6 @@ run root = do
         
         -------- test generations --------
 
-        -- Generate acceptance test by LLM
-        -- input  : Context (ADT)
-        -- output : hspec test
         case tree of
             Left  err -> do
                 putStrLn $ show err
@@ -88,15 +88,21 @@ run root = do
                         putStrLn $ show err2
                         exitFailure
                     Right cxt  -> do
-                        verify $ genAcceptance cxt tre
+                        -- Generate acceptance test by LLM
+                        -- input  : Context (ADT)
+                        -- output : hspec test
+                        verify $ genAcceptance cxt structureFilename tre
+
+                        -- Generate module test by LLM
+                        -- input  : Context (ADT), Text, StructureTree (ADT)
+                        -- output : hspec test
+                        verify $ genModuleTests cxt structureFilename tre
+    
+
+        
+        
+
         {-
-
-        -- Generate module test by LLM
-        -- input  : Context (ADT), Text, StructureTree (ADT)
-        -- output : hspec test
-        genModuleTest context structureFile tree
-
-
 
         -------- Iterating Implementation
 

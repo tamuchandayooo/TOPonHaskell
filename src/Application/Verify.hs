@@ -5,7 +5,7 @@ import System.Exit (exitSuccess)
 verify :: IO a -> IO ()
 verify f = do
     f
-    putStrLn "Are you satisfied with the result? [Y]es, [R]etry, [A]bort:"
+    putStrLn "[INFO]:Are you satisfied with the result? [Y]es, [R]etry, [A]bort:"
     input
     
     where

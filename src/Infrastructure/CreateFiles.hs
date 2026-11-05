@@ -3,7 +3,7 @@ module Infrastructure.CreateFiles where
 
 import System.IO (writeFile,appendFile)
 import System.IO.Error (tryIOError)
-import System.Process (CreateProcess(cwd), createProcess, proc, waitForProcess,std_in)
+import System.Process (CreateProcess(cwd), createProcess, proc, waitForProcess,std_in,StdStream(..))
 import System.Exit (ExitCode(..))
 import System.Directory (createDirectoryIfMissing)
 import System.FilePath ((</>),splitDirectories,dropExtension)

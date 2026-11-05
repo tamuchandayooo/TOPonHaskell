@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Application.App
+      Application.CreateTemplate
       Application.ImplGen
       Application.LLMGeneration
       Application.Structure

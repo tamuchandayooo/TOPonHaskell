@@ -23,8 +23,7 @@ genStructure context = do
     if exist
         -- if structure file already exists
         then do
-            putStrLn "A structure file is already exist."
-            putStrLn "[U]pdate [K]eep [R]egenerate"
+            putStrLn "[INFO]:A structure file is already exist.\n[U]pdate [K]eep [R]egenerate"
             usrInput <- getLine
             case usrInput of
                 "U" -> updateStructure context
@@ -38,7 +37,7 @@ genStructure context = do
 
 newStructure :: ProjectContext -> IO (FilePath)
 newStructure context = do
-    putStrLn "Generating structure file ..."
+    putStrLn "[INFO]:Generating structure file ..."
     -- render prompt
     let wholeSpec   = (description sSpec) <> "\n" <> (acceptanceTest sSpec)
     let wholePrompt = T.replace "{{project_description}}" wholeSpec sPrompt
@@ -53,7 +52,7 @@ newStructure context = do
 
 updateStructure :: ProjectContext -> IO (FilePath)
 updateStructure context = do
-    putStrLn "Updating structure file ..."
+    putStrLn "[INFO]:Updating structure file ..."
     -- render prompt (load current structure yaml)
     currentFile <- TIO.readFile structureFilename
     let wholeSpec   = (description sSpec) <> "\n" <> (acceptanceTest sSpec)
@@ -78,7 +77,7 @@ parseFromStructureTree path = do
 
 createFileStructure :: FilePath -> ST.StructureNode -> IO ()
 createFileStructure path tree = do
-    putStrLn "Creating File Structure..."
+    putStrLn "[INFO]:Creating File Structure..."
     crtFile <- createFile path tree
     case crtFile of
         Left  err -> putStrLn $ show err
