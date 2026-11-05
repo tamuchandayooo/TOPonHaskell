@@ -1,6 +1,7 @@
 module Domain.ProjectContext where
 
 import Data.Text (Text)
+import System.Exit (exitFailure)
 
 data ProjectContext = ProjectContext
     { spec :: Specs
@@ -26,3 +27,13 @@ data Prompts = Prompts
     , pModule           :: Text
     , pModuleRe         :: Text
     } deriving (Show)
+
+
+createContext rSpec rProm = do
+    case (rSpec, rProm) of
+        (Right spec, Right prom) -> Right ProjectContext
+            { spec = spec
+            , prom = prom
+            }
+        (Left err, _)            -> Left  err
+        (_, Left err)            -> Left  err

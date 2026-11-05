@@ -22,7 +22,7 @@ testFilepath tree = (getProjectname tree) </> "test"
         getProjectname (ProjectNode {name = projectname}) = T.unpack projectname
 
 acceptanceFilepath :: StructureNode -> FilePath
-acceptanceFilepath tree = testFilepath tree </> "Acceptance.hs"
+acceptanceFilepath tree = testFilepath tree </> "AcceptanceSpec.hs"
 
 ------------------------------------------------------------------------------------------------------
 
@@ -109,7 +109,7 @@ genModuleTest context structureText tree moduleName = do
 
 newModuleTest :: ProjectContext -> T.Text -> StructureNode -> T.Text -> IO ()
 newModuleTest context structureText tree moduleName = do
-    putStrLn $ "Generating Module:" ++ (T.unpack moduleName) ++ "Spec ..."
+    putStrLn $ "Generating Test Module:" ++ (T.unpack moduleName) ++ "Spec ..."
     let modulePath = (testFilepath tree) </> ((T.unpack moduleName) ++ "Spec.hs")
     let wholePrompt = T.replace "{{structure_file}}" structureText $
                       T.replace "{{module_name}}"    moduleName    $
@@ -122,7 +122,7 @@ newModuleTest context structureText tree moduleName = do
 
 updateModuleTest :: ProjectContext -> T.Text -> StructureNode -> T.Text -> IO ()
 updateModuleTest context structureText tree moduleName = do
-    putStrLn $ "Updating Module:" ++ (T.unpack moduleName) ++ "Spec ..."
+    putStrLn $ "Updating Test Module:" ++ (T.unpack moduleName) ++ "Spec ..."
     let modulePath = (testFilepath tree) </> ((T.unpack moduleName) ++ "Spec.hs")
     currentFile <- TIO.readFile $ modulePath
     let wholePrompt = T.replace "{{structure_file}}"   structureText $

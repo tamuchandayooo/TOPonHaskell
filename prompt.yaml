@@ -54,6 +54,7 @@ structure_prompt: |
   - Do not include test modules in src or app. Tests are generated separately under test.
   - Do not generate Haskell implementation code.
   - Do not invent requirements that are not implied by the project description.
+  - Whole output will be used as code. Do never include explanations outside the code block.
 
 structure_prompt_Re: |
   You are revising the structure of an existing Haskell Stack project.
@@ -81,6 +82,7 @@ structure_prompt_Re: |
   - Preserve the schema: Project, Directory, Module, Type, and Method nodes.
   - Do not generate Haskell implementation code.
   - Do not add requirements that are absent from the project description.
+  - Whole output will be used as code. Do never include explanations outside the code block.
 
 ##########################################################################################################
 # Prompts for acceptance-test generation
@@ -94,7 +96,7 @@ acceptanceTest_prompt: |
   Project structure and public interfaces:
   {{structure_file}}
 
-  Generate acceptance tests using Hspec.
+  Generate acceptance-test module named "AcceptanceSpec" using Hspec.
 
   Requirements:
   - Test the externally observable behavior of the application from the user's perspective.
@@ -110,7 +112,8 @@ acceptanceTest_prompt: |
   - Do not invent command-line options, output formats, or APIs that are not specified by the requirements or project structure.
   - If a requirement is too ambiguous to test, do not fabricate expected behavior; make the limitation explicit in a Haskell comment.
 
-  Return one Haskell code block containing the complete test module. Do not include explanations outside the code block.
+  Return one Haskell code block containing the complete test module.
+  Whole output will be used as code. Do never include explanations outside the code block.
 
 acceptanceTest_prompt_Re: |
   You are revising an existing Hspec acceptance-test module for a Haskell application built with Stack.
@@ -138,7 +141,8 @@ acceptanceTest_prompt_Re: |
   - Ensure the result is a complete, compilable Hspec module.
   - Explain unresolved ambiguity only in Haskell comments.
 
-  Return one Haskell code block containing the complete updated test module. Do not include explanations outside the code block.
+  Return one Haskell code block containing the complete updated test module.
+  Whole output will be used as code. Do never include explanations outside the code block.
 
 ##########################################################################################################
 # Prompts for per-module unit-test generation
@@ -178,7 +182,8 @@ moduleTest_prompt: |
   - Define spec :: Spec and organize tests with describe and it.
   - Do not define main in this module; the test runner is provided by hspec-discover.
 
-  Return one Haskell code block containing the complete test module. Do not include explanations outside the code block.
+  Return one Haskell code block containing the complete test module.
+  Whole output will be used as code. Do never include explanations outside the code block.
 
 moduleTest_prompt_Re: |
   You are revising an existing Hspec unit-test module for a Haskell Stack project.
@@ -213,7 +218,8 @@ moduleTest_prompt_Re: |
   - The module name must remain {{module_name}}Spec.
   - The corresponding path is test/{{module_name}}Spec.hs, replacing dots in the module name with directory separators. For example, Foo.BarSpec belongs in test/Foo/BarSpec.hs.
 
-  Return one Haskell code block containing the complete updated test module. Do not include explanations outside the code block.
+  Return one Haskell code block containing the complete updated test module. 
+  Whole output will be used as code. Do never include explanations outside the code block.
 
 ##########################################################################################################
 # Prompts for main-module implementation generation
@@ -252,6 +258,7 @@ main_Module_Implementation_Prompt: |
   - Return the complete contents of app/Main.hs as one Haskell code block.
   - Do not include Markdown explanations outside the code block.
   - Do not output other project files.
+  - Whole output will be used as code. Do never include explanations outside the code block or output other files.
 
 main_Module_Implementation_Prompt_Re: |
   You are revising the executable entry point of a Haskell application built with Stack.
@@ -288,7 +295,7 @@ main_Module_Implementation_Prompt_Re: |
 
   Output requirements:
   - Return the complete revised contents of app/Main.hs as one Haskell code block.
-  - Do not include explanations outside the code block or output other files.
+  - Whole output will be used as code. Do never include explanations outside the code block or output other files.
 
 ##########################################################################################################
 # Prompts for module implementation generation
@@ -331,7 +338,7 @@ module_Implementation_Prompt: |
   Output requirements:
   - Return the complete source code for the target module as one Haskell code block.
   - The module declaration and file path must correspond to {{module_name}}.
-  - Do not include explanations outside the code block or output other files.
+  - Whole output will be used as code. Do never include explanations outside the code block or output other files.
 
 module_Implementation_Prompt_Re: |
   You are revising one Haskell module in a Stack project that follows Clean Architecture.
@@ -372,4 +379,4 @@ module_Implementation_Prompt_Re: |
   Output requirements:
   - Return the complete revised source code for the target module as one Haskell code block.
   - Keep the module declaration and file path consistent with {{module_name}}.
-  - Do not include explanations outside the code block or output other files.
+  - Whole output will be used as code. Do never include explanations outside the code block or output other files.

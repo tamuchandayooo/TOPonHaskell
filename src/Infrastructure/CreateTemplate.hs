@@ -1,4 +1,4 @@
-module Application.CreateTemplate where
+module Infrastructure.CreateTemplate where
 
 import System.Exit (exitSuccess, exitFailure)
 import System.FilePath ((</>))

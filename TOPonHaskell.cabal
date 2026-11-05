@@ -26,16 +26,17 @@ source-repository head
 library
   exposed-modules:
       Application.App
-      Application.CreateTemplate
       Application.ImplGen
       Application.LLMGeneration
       Application.Structure
       Application.TestGen
       Application.Verify
       Domain.LLMRequest
+      Domain.ModuleInfo
       Domain.ProjectContext
       Domain.StructureTree
       Infrastructure.CreateFiles
+      Infrastructure.CreateTemplate
       Infrastructure.FileOutput
       Infrastructure.LLM.Ollama
       Infrastructure.ReadYaml
