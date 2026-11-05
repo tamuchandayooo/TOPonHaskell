@@ -4,13 +4,33 @@ module Application.ImplGen where
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO 
 import System.FilePath (takeFileName, dropExtension,(</>))
+import System.Exit
 
 import qualified Domain.StructureTree as ST
 import Domain.ProjectContext
 import Domain.ModuleInfo
+import Domain.TestResult
 import Application.LLMGeneration
 import Infrastructure.LLM.Ollama
 import Application.TestGen (testFilepath)
+import Infrastructure.StackRunner
+
+genAndTestModules :: ProjectContext -> FilePath -> FilePath -> T.Text -> [ModuleInfo] -> IO ()
+genAndTestModules context structureFile projectName testResult modules = do
+    genModuleImpls context structureFile testResult modules
+    runTest <- runStackTest projectName
+    case runTest of
+        Left  err -> do 
+            putStrLn $ show err
+            exitFailure
+        Right tst -> do
+            putStrLn $ testStdout tst
+            putStrLn $ testStderr tst
+            case testExitCode tst of
+                ExitSuccess   -> exitSuccess
+                ExitFailure _ -> do
+                    putStrLn "[INFO]:Test Failed. Retry Generation."
+                    genAndTestModules context structureFile projectName (T.pack (testStdout tst) <> "\n" <> T.pack (testStderr tst)) modules
 
 genModuleImpls :: ProjectContext -> FilePath -> T.Text -> [ModuleInfo] -> IO ()
 genModuleImpls context structureFile testResult modules = do

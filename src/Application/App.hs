@@ -6,14 +6,16 @@ import System.Directory (withCurrentDirectory, doesFileExist)
 import System.Exit (exitSuccess, exitFailure)
 import System.FilePath ((</>))
 
+import Domain.StructureTree
 import Domain.ProjectContext
 import Domain.ModuleInfo (getModuleinfoFromTree)
 import Application.Verify
 import Application.Structure
 import Application.TestGen
-import Application.ImplGen (genModuleImpls)
+import Application.ImplGen (genModuleImpls, genAndTestModules)
 import Infrastructure.CreateTemplate
 import Infrastructure.ReadYaml
+import Application.TestSuite (loadAndSaveTestSuites)
 
 -- 仕様書とモデルを渡して，全体の処理を実行したい．
 -- プロジェクト概要の部分はcontextとしてすべてのLLM生成に引き回す
@@ -90,8 +92,11 @@ run root = do
         
 
         -------- Iterating Implementation
-        let modules = getModuleinfoFromTree tree 
-        genModuleImpls context structureFilename (T.pack "") modules
+        let modules     = getModuleinfoFromTree tree 
+        let projectName = T.unpack $ name tree 
+
+        genAndTestModules context structureFilename projectName (T.pack "") modules
+        
         {-
         genAndRunImpl spec structureFile tree acceptance prom
         {-

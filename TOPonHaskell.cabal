@@ -28,18 +28,23 @@ library
       Application.App
       Application.ImplGen
       Application.LLMGeneration
+      Application.StackGen
       Application.Structure
       Application.TestGen
+      Application.TestSuite
       Application.Verify
       Domain.LLMRequest
       Domain.ModuleInfo
       Domain.ProjectContext
       Domain.StructureTree
+      Domain.TestResult
       Infrastructure.CreateFiles
       Infrastructure.CreateTemplate
       Infrastructure.FileOutput
       Infrastructure.LLM.Ollama
+      Infrastructure.PackageYaml
       Infrastructure.ReadYaml
+      Infrastructure.StackRunner
   other-modules:
       Paths_TOPonHaskell
   autogen-modules:
