@@ -11,6 +11,7 @@ import Application.LLMGeneration
 import Infrastructure.LLM.Ollama
 import Infrastructure.ReadYaml
 import Infrastructure.CreateFiles
+import Infrastructure.Logger
 
 ------------------------------------------------------------------------------------------------------
 
@@ -23,8 +24,9 @@ genStructure context = do
     if exist
         -- if structure file already exists
         then do
-            putStrLn "[INFO]:A structure file is already exist.\n[U]pdate [K]eep [R]egenerate"
+            putInfoLog "A structure file is already exist. [U]pdate [K]eep [R]egenerate"
             usrInput <- getLine
+            putInputLog usrInput
             case usrInput of
                 "U" -> updateStructure context
                 "K" -> return structureFilename
@@ -37,7 +39,7 @@ genStructure context = do
 
 newStructure :: ProjectContext -> IO (FilePath)
 newStructure context = do
-    putStrLn "[INFO]:Generating structure file ..."
+    putInfoLog "Generating structure file ..."
     -- render prompt
     let wholeSpec   = (description sSpec) <> "\n" <> (acceptanceTest sSpec)
     let wholePrompt = T.replace "{{project_description}}" wholeSpec sPrompt
@@ -52,7 +54,7 @@ newStructure context = do
 
 updateStructure :: ProjectContext -> IO (FilePath)
 updateStructure context = do
-    putStrLn "[INFO]:Updating structure file ..."
+    putInfoLog "Updating structure file ..."
     -- render prompt (load current structure yaml)
     currentFile <- TIO.readFile structureFilename
     let wholeSpec   = (description sSpec) <> "\n" <> (acceptanceTest sSpec)
@@ -77,7 +79,7 @@ parseFromStructureTree path = do
 
 createFileStructure :: FilePath -> ST.StructureNode -> IO ()
 createFileStructure path tree = do
-    putStrLn "[INFO]:Creating File Structure..."
+    putInfoLog "Creating File Structure..."
     crtFile <- createFile path tree
     case crtFile of
         Left  err -> putStrLn $ show err

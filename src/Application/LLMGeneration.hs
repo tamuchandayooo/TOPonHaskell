@@ -5,6 +5,7 @@ import Data.Text(Text,pack)
 
 import Domain.LLMRequest
 import Infrastructure.FileOutput
+import Infrastructure.Logger
 
 ------------------------------------------------------------------------------------------------------
 
@@ -33,5 +34,5 @@ llmGenerateAndSave :: FilePath -> Text -> LLMRepository IO -> Text -> IO ()
 llmGenerateAndSave path text repo model = do
     response <- llmGenerate text repo model
     case response of
-        Left  err -> putStrLn $ "Error:" ++ show err
+        Left  err -> putErrorLog $ show err
         Right res -> fileOutput path res

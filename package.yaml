@@ -28,6 +28,8 @@ dependencies:
 - req
 - filepath
 - process
+- haskell-src-exts
+- time
 
 ghc-options:
 - -Wall

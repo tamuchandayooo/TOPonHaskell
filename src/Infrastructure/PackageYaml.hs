@@ -22,6 +22,8 @@ loadPackage tree = do
         Left  err -> fail (show err)
         Right val -> return val
 
+------------------------------------------------------------------------------------------------------
+
 addTestSuites :: Text -> Value -> [ModuleInfo] -> Either String Value
 addTestSuites projectName package moduleInfo =
     case package of

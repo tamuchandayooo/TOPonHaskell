@@ -26,9 +26,9 @@ source-repository head
 library
   exposed-modules:
       Application.App
+      Application.Dependencies
       Application.ImplGen
       Application.LLMGeneration
-      Application.StackGen
       Application.Structure
       Application.TestGen
       Application.TestSuite
@@ -41,7 +41,9 @@ library
       Infrastructure.CreateFiles
       Infrastructure.CreateTemplate
       Infrastructure.FileOutput
+      Infrastructure.ImportAnalyzer
       Infrastructure.LLM.Ollama
+      Infrastructure.Logger
       Infrastructure.PackageYaml
       Infrastructure.ReadYaml
       Infrastructure.StackRunner
@@ -57,9 +59,11 @@ library
     , base >=4.7 && <5
     , directory
     , filepath
+    , haskell-src-exts
     , process
     , req
     , text
+    , time
     , yaml
   default-language: Haskell2010
 
@@ -78,9 +82,11 @@ executable TOPonHaskell-exe
     , base >=4.7 && <5
     , directory
     , filepath
+    , haskell-src-exts
     , process
     , req
     , text
+    , time
     , yaml
   default-language: Haskell2010
 
@@ -100,8 +106,10 @@ test-suite TOPonHaskell-test
     , base >=4.7 && <5
     , directory
     , filepath
+    , haskell-src-exts
     , process
     , req
     , text
+    , time
     , yaml
   default-language: Haskell2010

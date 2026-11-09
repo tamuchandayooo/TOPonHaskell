@@ -13,6 +13,7 @@ import Application.Verify
 import Application.Structure
 import Application.TestGen
 import Application.ImplGen (genModuleImpls, genAndTestModules)
+import Application.Dependencies
 import Infrastructure.CreateTemplate
 import Infrastructure.ReadYaml
 import Application.TestSuite (loadAndSaveTestSuites)
@@ -91,8 +92,12 @@ run root = do
 
         
 
-        -------- Iterating Implementation
+        -------- Iterating Implementation --------
         let modules     = getModuleinfoFromTree tree 
         let projectName = T.unpack $ name tree 
 
-        genAndTestModules context structureFilename projectName (T.pack "") modules
+        -- genAndTestModules context structureFilename projectName (T.pack "") modules
+        genModuleImpls context structureFilename (T.pack "") modules
+
+        libs <- extractModulesImport modules
+        putStrLn $ show libs
