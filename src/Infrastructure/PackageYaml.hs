@@ -5,6 +5,7 @@ module Infrastructure.PackageYaml where
 import Data.Aeson (Value(..), object, (.=),toJSON)
 import qualified Data.Aeson.Key as Key
 import qualified Data.Aeson.KeyMap as KM
+import qualified Data.Vector as V
 import Data.Text (Text)
 import qualified Data.Text as T
 import Data.Yaml (decodeFileEither, encodeFile)
@@ -15,52 +16,35 @@ import Domain.StructureTree
 
 ------------------------------------------------------------------------------------------------------
 
-loadPackage :: StructureNode -> IO Value
-loadPackage tree = do
-    let projectName = name tree
-    let packagePath = T.unpack projectName </> "package.yaml"
+loadPackage :: FilePath -> IO Value
+loadPackage projectDir = do
+    let packagePath = projectDir </> "package.yaml"
     loadResult <- decodeFileEither packagePath
     case loadResult of
         Left  err -> fail (show err)
         Right val -> return val
 
-savePackage :: Text -> Value -> IO ()
-savePackage projectName package = do
-    let packagePath = T.unpack projectName </> "package.yaml"
+savePackage :: FilePath -> Value -> IO ()
+savePackage projectDir package = do
+    let packagePath = projectDir </> "package.yaml"
     encodeFile packagePath package
 
 ------------------------------------------------------------------------------------------------------
 
-addTestSuites :: Text -> Value -> [ModuleInfo] -> Either String Value
-addTestSuites projectName package moduleInfo =
+addLibrary :: Value -> [T.Text] -> Either String Value
+addLibrary package libs = do
     case package of
         Object root -> do
-            tests <- case KM.lookup "tests" root of
-                Nothing -> Right KM.empty
-                Just (Object obj) -> Right obj
-                Just _ -> Left "tests isnt an Object"
-            let updatedTests = foldl (addOneSuite projectName) tests moduleInfo
-            let updatedRoot = KM.insert "tests" (Object updatedTests) root
+            dependencies <- case KM.lookup "dependencies" root of
+                Nothing          -> Right V.empty
+                Just (Array arr) -> Right arr
+                Just _           -> Left  "dependencies isnt an Array"
+            let updatedDependencies = foldl addOneLibrary dependencies libs
+            let updatedRoot = KM.insert "dependencies" (Array updatedDependencies) root
             Right (Object updatedRoot)
-
         _           -> Left "package isnt an Object"
 
-addOneSuite :: Text -> KM.KeyMap Value -> ModuleInfo -> KM.KeyMap Value
-addOneSuite projectName tests moduleInfo =
-    KM.insert
-        (Key.fromText suiteName)
-        suiteConfig
-        tests
-  where
-    suiteName = makeSuiteName (moduleName moduleInfo)
-    suiteConfig = object
-        [ "main"         .= makeMainName (moduleName moduleInfo)
-        , "source-dirs"  .= ("test" :: Text)
-        , "dependencies" .= (["base", projectName, "hspec"] :: [Text])
-        ]
 
-makeSuiteName :: Text -> Text
-makeSuiteName name = T.toLower $ T.replace "." "-" name <> "-test"
+addOneLibrary :: V.Vector Value -> Text -> V.Vector Value
+addOneLibrary dependencies lib = V.snoc dependencies (String $ lib)
 
-makeMainName :: Text -> FilePath
-makeMainName name = T.unpack $ T.replace "." "" name <> "Main.hs"

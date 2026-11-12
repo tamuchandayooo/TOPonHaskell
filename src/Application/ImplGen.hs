@@ -11,15 +11,22 @@ import Domain.ProjectContext
 import Domain.ModuleInfo
 import Domain.TestResult
 import Application.LLMGeneration
-import Infrastructure.LLM.Ollama
 import Application.TestGen (testFilepath,acceptanceFilepath)
+import Application.Dependencies
+import Infrastructure.LLM.Ollama
 import Infrastructure.StackRunner
 import Infrastructure.Logger
 
 genAndTestModules :: ProjectContext -> FilePath -> FilePath -> T.Text -> [ModuleInfo] -> IO ()
-genAndTestModules context structureFile projectName testResult modules = do
+genAndTestModules context structureFile projectDir testResult modules = do
+    -- Generate implementation
     genModuleImpls context structureFile testResult modules
-    runTest <- runStackTest projectName
+
+    -- Update Libraries
+    
+
+    -- Run tests
+    runTest   <- runStackTest projectDir
     case runTest of
         Left  err -> do 
             putErrorLog $ show err
@@ -31,7 +38,7 @@ genAndTestModules context structureFile projectName testResult modules = do
                 ExitSuccess   -> exitSuccess
                 ExitFailure _ -> do
                     putInfoLog "Test Failed. Retry Generation."
-                    genAndTestModules context structureFile projectName (T.pack (testStdout tst) <> "\n" <> T.pack (testStderr tst)) modules
+                    genAndTestModules context structureFile projectDir (T.pack (testStdout tst) <> "\n" <> T.pack (testStderr tst)) modules
 
 genModuleImpls :: ProjectContext -> FilePath -> T.Text -> [ModuleInfo] -> IO ()
 genModuleImpls context structureFile testResult modules = do

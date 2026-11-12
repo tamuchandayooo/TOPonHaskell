@@ -3,10 +3,11 @@ module Domain.ModuleInfo where
 
 import Data.Text (Text,pack,unpack,intercalate)
 import System.FilePath ((</>))
-
-import Domain.StructureTree
 import GHC.Base (Module(Module))
 import GHC.IO.Handle.Lock (FileLockingNotSupported(FileLockingNotSupported))
+
+import Domain.StructureTree
+import Application.TestGen (acceptanceFilepath)
 
 data ModuleInfo = ModuleInfo
     { moduleName :: Text
@@ -24,6 +25,19 @@ getModuleinfoFromTree tree = go [] (unpack $ name tree) tree
 
             DirectoryNode name _ children ->
                 concatMap (go (dir ++ [unpack name]) root) children
+            
+            ModuleNode "Main" _ _ ->
+                let
+                    modulePath = foldl (</>) root dir
+                                 </> "Main.hs"
+
+                    testFilePath = acceptanceFilepath tree
+                in
+                    [ModuleInfo
+                        { moduleName = intercalate "." (map pack dir ++ ["Main"])
+                        , implPath = modulePath
+                        , testPath = testFilePath
+                        }]
 
             ModuleNode name _ _ ->
                 let

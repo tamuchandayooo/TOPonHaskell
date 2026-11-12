@@ -30,6 +30,7 @@ dependencies:
 - process
 - haskell-src-exts
 - time
+- vector
 
 ghc-options:
 - -Wall

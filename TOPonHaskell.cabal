@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.39.1.
+-- This file has been generated from package.yaml by hpack version 0.39.6.
 --
 -- see: https://github.com/sol/hpack
 
@@ -31,7 +31,6 @@ library
       Application.LLMGeneration
       Application.Structure
       Application.TestGen
-      Application.TestSuite
       Application.Verify
       Domain.LLMRequest
       Domain.ModuleInfo
@@ -44,6 +43,7 @@ library
       Infrastructure.ImportAnalyzer
       Infrastructure.LLM.Ollama
       Infrastructure.Logger
+      Infrastructure.PackageName
       Infrastructure.PackageYaml
       Infrastructure.ReadYaml
       Infrastructure.StackRunner
@@ -64,6 +64,7 @@ library
     , req
     , text
     , time
+    , vector
     , yaml
   default-language: Haskell2010
 
@@ -87,6 +88,7 @@ executable TOPonHaskell-exe
     , req
     , text
     , time
+    , vector
     , yaml
   default-language: Haskell2010
 
@@ -111,5 +113,6 @@ test-suite TOPonHaskell-test
     , req
     , text
     , time
+    , vector
     , yaml
   default-language: Haskell2010
