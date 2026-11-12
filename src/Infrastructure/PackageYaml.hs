@@ -2,7 +2,7 @@
 
 module Infrastructure.PackageYaml where
 
-import Data.Aeson (Value(..), object, (.=))
+import Data.Aeson (Value(..), object, (.=),toJSON)
 import qualified Data.Aeson.Key as Key
 import qualified Data.Aeson.KeyMap as KM
 import Data.Text (Text)
@@ -13,6 +13,8 @@ import System.FilePath ((</>))
 import Domain.ModuleInfo
 import Domain.StructureTree
 
+------------------------------------------------------------------------------------------------------
+
 loadPackage :: StructureNode -> IO Value
 loadPackage tree = do
     let projectName = name tree
@@ -21,6 +23,11 @@ loadPackage tree = do
     case loadResult of
         Left  err -> fail (show err)
         Right val -> return val
+
+savePackage :: Text -> Value -> IO ()
+savePackage projectName package = do
+    let packagePath = T.unpack projectName </> "package.yaml"
+    encodeFile packagePath package
 
 ------------------------------------------------------------------------------------------------------
 
@@ -57,8 +64,3 @@ makeSuiteName name = T.toLower $ T.replace "." "-" name <> "-test"
 
 makeMainName :: Text -> FilePath
 makeMainName name = T.unpack $ T.replace "." "" name <> "Main.hs"
-
-savePackage :: Text -> Value -> IO ()
-savePackage projectName package = do
-    let packagePath = T.unpack projectName </> "package.yaml"
-    encodeFile packagePath package

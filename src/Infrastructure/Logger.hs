@@ -55,5 +55,5 @@ putInputLog m = do
     crtLogFileIfMissing
     now <- getCurrentTime
     let timestamp = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S" now
-    let content = "[" ++ timestamp ++ "] >> " ++ m ++ "\n"
+    let content = "[" ++ timestamp ++ "]>> " ++ m ++ "\n"
     appendFile logfile content

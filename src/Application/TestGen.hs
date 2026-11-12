@@ -99,7 +99,7 @@ genModuleTest context structureText tree moduleName =
             if exist
                 -- if module test already exists
                     then do
-                        putInfoLog $ "The module " ++ (T.unpack moduleName) ++ "Spec is already exist. [U]pdate [K]eep [R]egenerate"
+                        putInfoLog $ "The module \"" ++ (T.unpack moduleName) ++ "Spec\" is already exist. [U]pdate [K]eep [R]egenerate"
                         usrInput <- getLine
                         case usrInput of
                             "U" -> updateModuleTest   context structureText tree moduleName
@@ -112,7 +112,7 @@ genModuleTest context structureText tree moduleName =
 
 newModuleTest :: ProjectContext -> T.Text -> StructureNode -> T.Text -> IO ()
 newModuleTest context structureText tree moduleName = do
-    putInfoLog $ "Generating Test Module:" ++ (T.unpack moduleName) ++ "Spec ..."
+    putInfoLog $ "Generating Test Module:\"" ++ (T.unpack moduleName) ++ "Spec\" ..."
     let modulePath = (testFilepath tree) </> ((T.unpack moduleName) ++ "Spec.hs")
     let wholePrompt = T.replace "{{structure_file}}" structureText $
                       T.replace "{{module_name}}"    moduleName    $
@@ -125,7 +125,7 @@ newModuleTest context structureText tree moduleName = do
 
 updateModuleTest :: ProjectContext -> T.Text -> StructureNode -> T.Text -> IO ()
 updateModuleTest context structureText tree moduleName = do
-    putInfoLog $ "Updating Test Module:" ++ (T.unpack moduleName) ++ "Spec ..."
+    putInfoLog $ "Updating Test Module:\"" ++ (T.unpack moduleName) ++ "Spec\" ..."
     let modulePath = (testFilepath tree) </> ((T.unpack moduleName) ++ "Spec.hs")
     currentFile <- TIO.readFile $ modulePath
     let wholePrompt = T.replace "{{structure_file}}"   structureText $

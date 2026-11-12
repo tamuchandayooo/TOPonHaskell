@@ -79,7 +79,7 @@ parseFromStructureTree path = do
 
 createFileStructure :: FilePath -> ST.StructureNode -> IO ()
 createFileStructure path tree = do
-    putInfoLog "Creating File Structure..."
+    putInfoLog "Creating File Structure ..."
     crtFile <- createFile path tree
     case crtFile of
         Left  err -> putStrLn $ show err

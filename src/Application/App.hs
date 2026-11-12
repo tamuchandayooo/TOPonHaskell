@@ -57,7 +57,7 @@ run root = do
         -- Generate structure in yaml by LLM
         -- input  : Context (ADT)
         -- output : yaml file
-        verify $ genStructure context
+        --verify $ genStructure context
     
         -- Create structure tree
         -- input  : structure file
@@ -73,7 +73,7 @@ run root = do
         -- Create stack project and file structure
         -- input  : StructureTree (ADT)
         -- output : stack project (IO ())
-        createFileStructure "." tree
+        -- createFileStructure "." tree
                  
 
         
@@ -83,21 +83,22 @@ run root = do
         -- Generate acceptance test by LLM
         -- input  : Context (ADT)
         -- output : hspec test
-        verify $ genAcceptance context structureFilename tree
+        -- verify $ genAcceptance context structureFilename tree
 
         -- Generate module test by LLM
         -- input  : Context (ADT), Text, StructureTree (ADT)
         -- output : hspec test
-        verify $ genModuleTests context structureFilename tree 
+        -- verify $ genModuleTests context structureFilename tree 
 
         
 
         -------- Iterating Implementation --------
         let modules     = getModuleinfoFromTree tree 
         let projectName = T.unpack $ name tree 
+        putStrLn $ show modules
 
         -- genAndTestModules context structureFilename projectName (T.pack "") modules
-        genModuleImpls context structureFilename (T.pack "") modules
+        -- genModuleImpls context structureFilename (T.pack "") modules
 
         libs <- extractModulesImport modules
         putStrLn $ show libs
