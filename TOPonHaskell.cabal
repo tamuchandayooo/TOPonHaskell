@@ -43,7 +43,6 @@ library
       Infrastructure.ImportAnalyzer
       Infrastructure.LLM.Ollama
       Infrastructure.Logger
-      Infrastructure.PackageName
       Infrastructure.PackageYaml
       Infrastructure.ReadYaml
       Infrastructure.StackRunner
