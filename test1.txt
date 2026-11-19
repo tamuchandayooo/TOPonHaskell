@@ -1,212 +1,212 @@
 [ UnGuardedRhs
     SrcSpanInfo
-      { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 7 14 27
-      , srcInfoPoints = [ SrcSpan "test\\Spec.hs" 12 7 12 8 ]
+      { srcInfoSpan = SrcSpan "test//Spec.hs" 12 7 14 27
+      , srcInfoPoints = [ SrcSpan "test//Spec.hs" 12 7 12 8 ]
       }
     (InfixApp
        SrcSpanInfo
-         { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 9 14 27
+         { srcInfoSpan = SrcSpan "test//Spec.hs" 12 9 14 27
          , srcInfoPoints = []
          }
        (App
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 9 12 31
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 12 9 12 31
             , srcInfoPoints = []
             }
           (Var
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 9 12 17
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 12 9 12 17
                , srcInfoPoints = []
                }
              (UnQual
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 9 12 17
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 12 9 12 17
                   , srcInfoPoints = []
                   }
                 (Ident
                    SrcSpanInfo
-                     { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 9 12 17
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 12 9 12 17
                      , srcInfoPoints = []
                      }
                    "describe")))
           (Lit
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 18 12 31
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 12 18 12 31
                , srcInfoPoints = []
                }
              (String
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 18 12 31
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 12 18 12 31
                   , srcInfoPoints = []
                   }
                 "description"
                 "description")))
        (QVarOp
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 32 12 33
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 12 32 12 33
             , srcInfoPoints = []
             }
           (UnQual
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 32 12 33
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 12 32 12 33
                , srcInfoPoints = []
                }
              (Symbol
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 32 12 33
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 12 32 12 33
                   , srcInfoPoints = []
                   }
                 "$")))
        (Do
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 12 34 14 27
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 12 34 14 27
             , srcInfoPoints =
-                [ SrcSpan "test\\Spec.hs" 12 34 12 36
-                , SrcSpan "test\\Spec.hs" 13 5 13 5
-                , SrcSpan "test\\Spec.hs" 16 1 16 0
+                [ SrcSpan "test//Spec.hs" 12 34 12 36
+                , SrcSpan "test//Spec.hs" 13 5 13 5
+                , SrcSpan "test//Spec.hs" 16 1 16 0
                 ]
             }
           [ Qualifier
               SrcSpanInfo
-                { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 14 27
+                { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 14 27
                 , srcInfoPoints = []
                 }
               (InfixApp
                  SrcSpanInfo
-                   { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 14 27
+                   { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 14 27
                    , srcInfoPoints = []
                    }
                  (App
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 13 19
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 13 19
                       , srcInfoPoints = []
                       }
                     (Var
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 13 7
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 13 7
                          , srcInfoPoints = []
                          }
                        (UnQual
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 13 7
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 13 7
                             , srcInfoPoints = []
                             }
                           (Ident
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 5 13 7
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 13 5 13 7
                                , srcInfoPoints = []
                                }
                              "it")))
                     (Lit
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 8 13 19
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 13 8 13 19
                          , srcInfoPoints = []
                          }
                        (String
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 8 13 19
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 13 8 13 19
                             , srcInfoPoints = []
                             }
                           "is test 1"
                           "is test 1")))
                  (QVarOp
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 20 13 21
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 13 20 13 21
                       , srcInfoPoints = []
                       }
                     (UnQual
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 20 13 21
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 13 20 13 21
                          , srcInfoPoints = []
                          }
                        (Symbol
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 13 20 13 21
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 13 20 13 21
                             , srcInfoPoints = []
                             }
                           "$")))
                  (InfixApp
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 9 14 27
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 14 9 14 27
                       , srcInfoPoints = []
                       }
                     (Lit
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 9 14 10
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 14 9 14 10
                          , srcInfoPoints = []
                          }
                        (Int
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 9 14 10
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 14 9 14 10
                             , srcInfoPoints = []
                             }
                           1
                           "1"))
                     (QVarOp
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 11 14 12
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 14 11 14 12
                          , srcInfoPoints = []
                          }
                        (UnQual
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 11 14 12
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 14 11 14 12
                             , srcInfoPoints = []
                             }
                           (Symbol
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 11 14 12
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 14 11 14 12
                                , srcInfoPoints = []
                                }
                              "+")))
                     (InfixApp
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 13 14 27
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 14 13 14 27
                          , srcInfoPoints = []
                          }
                        (Lit
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 13 14 14
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 14 13 14 14
                             , srcInfoPoints = []
                             }
                           (Int
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 13 14 14
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 14 13 14 14
                                , srcInfoPoints = []
                                }
                              1
                              "1"))
                        (QVarOp
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 15 14 25
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 14 15 14 25
                             , srcInfoPoints =
-                                [ SrcSpan "test\\Spec.hs" 14 15 14 16
-                                , SrcSpan "test\\Spec.hs" 14 16 14 24
-                                , SrcSpan "test\\Spec.hs" 14 24 14 25
+                                [ SrcSpan "test//Spec.hs" 14 15 14 16
+                                , SrcSpan "test//Spec.hs" 14 16 14 24
+                                , SrcSpan "test//Spec.hs" 14 24 14 25
                                 ]
                             }
                           (UnQual
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 15 14 25
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 14 15 14 25
                                , srcInfoPoints =
-                                   [ SrcSpan "test\\Spec.hs" 14 15 14 16
-                                   , SrcSpan "test\\Spec.hs" 14 16 14 24
-                                   , SrcSpan "test\\Spec.hs" 14 24 14 25
+                                   [ SrcSpan "test//Spec.hs" 14 15 14 16
+                                   , SrcSpan "test//Spec.hs" 14 16 14 24
+                                   , SrcSpan "test//Spec.hs" 14 24 14 25
                                    ]
                                }
                              (Ident
                                 SrcSpanInfo
-                                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 16 14 24
+                                  { srcInfoSpan = SrcSpan "test//Spec.hs" 14 16 14 24
                                   , srcInfoPoints = []
                                   }
                                 "shouldBe")))
                        (Lit
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 26 14 27
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 14 26 14 27
                             , srcInfoPoints = []
                             }
                           (Int
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 14 26 14 27
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 14 26 14 27
                                , srcInfoPoints = []
                                }
                              2
@@ -214,240 +214,385 @@
           ]))
 , UnGuardedRhs
     SrcSpanInfo
-      { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 7 19 37
-      , srcInfoPoints = [ SrcSpan "test\\Spec.hs" 17 7 17 8 ]
+      { srcInfoSpan = SrcSpan "test//Spec.hs" 17 8 19 37
+      , srcInfoPoints = [ SrcSpan "test//Spec.hs" 17 8 17 9 ]
       }
     (InfixApp
        SrcSpanInfo
-         { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 9 19 37
+         { srcInfoSpan = SrcSpan "test//Spec.hs" 17 10 19 37
          , srcInfoPoints = []
          }
        (App
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 9 17 26
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 17 10 17 27
             , srcInfoPoints = []
             }
           (Var
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 9 17 16
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 17 10 17 17
                , srcInfoPoints = []
                }
              (UnQual
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 9 17 16
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 17 10 17 17
                   , srcInfoPoints = []
                   }
                 (Ident
                    SrcSpanInfo
-                     { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 9 17 16
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 17 10 17 17
                      , srcInfoPoints = []
                      }
                    "context")))
           (Lit
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 17 17 26
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 17 18 17 27
                , srcInfoPoints = []
                }
              (String
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 17 17 26
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 17 18 17 27
                   , srcInfoPoints = []
                   }
                 "context"
                 "context")))
        (QVarOp
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 27 17 28
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 17 28 17 29
             , srcInfoPoints = []
             }
           (UnQual
              SrcSpanInfo
-               { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 27 17 28
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 17 28 17 29
                , srcInfoPoints = []
                }
              (Symbol
                 SrcSpanInfo
-                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 27 17 28
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 17 28 17 29
                   , srcInfoPoints = []
                   }
                 "$")))
        (Do
           SrcSpanInfo
-            { srcInfoSpan = SrcSpan "test\\Spec.hs" 17 29 19 37
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 17 30 19 37
             , srcInfoPoints =
-                [ SrcSpan "test\\Spec.hs" 17 29 17 31
-                , SrcSpan "test\\Spec.hs" 18 5 18 5
-                , SrcSpan "test\\Spec.hs" 20 1 20 0
+                [ SrcSpan "test//Spec.hs" 17 30 17 32
+                , SrcSpan "test//Spec.hs" 18 5 18 5
+                , SrcSpan "test//Spec.hs" 21 1 21 0
                 ]
             }
           [ Qualifier
               SrcSpanInfo
-                { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 19 37
+                { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 19 37
                 , srcInfoPoints = []
                 }
               (InfixApp
                  SrcSpanInfo
-                   { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 19 37
+                   { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 19 37
                    , srcInfoPoints = []
                    }
                  (App
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 18 21
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 18 21
                       , srcInfoPoints = []
                       }
                     (Var
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 18 12
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 18 12
                          , srcInfoPoints = []
                          }
                        (UnQual
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 18 12
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 18 12
                             , srcInfoPoints = []
                             }
                           (Ident
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 5 18 12
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 18 5 18 12
                                , srcInfoPoints = []
                                }
                              "specify")))
                     (Lit
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 13 18 21
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 18 13 18 21
                          , srcInfoPoints = []
                          }
                        (String
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 13 18 21
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 18 13 18 21
                             , srcInfoPoints = []
                             }
                           "test 2"
                           "test 2")))
                  (QVarOp
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 22 18 23
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 18 22 18 23
                       , srcInfoPoints = []
                       }
                     (UnQual
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 22 18 23
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 18 22 18 23
                          , srcInfoPoints = []
                          }
                        (Symbol
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 18 22 18 23
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 18 22 18 23
                             , srcInfoPoints = []
                             }
                           "$")))
                  (InfixApp
                     SrcSpanInfo
-                      { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 9 19 37
+                      { srcInfoSpan = SrcSpan "test//Spec.hs" 19 9 19 37
                       , srcInfoPoints = []
                       }
                     (Lit
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 9 19 10
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 19 9 19 10
                          , srcInfoPoints = []
                          }
                        (Int
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 9 19 10
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 19 9 19 10
                             , srcInfoPoints = []
                             }
                           1
                           "1"))
                     (QVarOp
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 11 19 12
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 19 11 19 12
                          , srcInfoPoints = []
                          }
                        (UnQual
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 11 19 12
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 19 11 19 12
                             , srcInfoPoints = []
                             }
                           (Symbol
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 11 19 12
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 19 11 19 12
                                , srcInfoPoints = []
                                }
                              "+")))
                     (InfixApp
                        SrcSpanInfo
-                         { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 13 19 37
+                         { srcInfoSpan = SrcSpan "test//Spec.hs" 19 13 19 37
                          , srcInfoPoints = []
                          }
                        (Lit
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 13 19 14
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 19 13 19 14
                             , srcInfoPoints = []
                             }
                           (Int
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 13 19 14
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 19 13 19 14
                                , srcInfoPoints = []
                                }
                              1
                              "1"))
                        (QVarOp
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 15 19 30
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 19 15 19 30
                             , srcInfoPoints =
-                                [ SrcSpan "test\\Spec.hs" 19 15 19 16
-                                , SrcSpan "test\\Spec.hs" 19 16 19 29
-                                , SrcSpan "test\\Spec.hs" 19 29 19 30
+                                [ SrcSpan "test//Spec.hs" 19 15 19 16
+                                , SrcSpan "test//Spec.hs" 19 16 19 29
+                                , SrcSpan "test//Spec.hs" 19 29 19 30
                                 ]
                             }
                           (UnQual
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 15 19 30
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 19 15 19 30
                                , srcInfoPoints =
-                                   [ SrcSpan "test\\Spec.hs" 19 15 19 16
-                                   , SrcSpan "test\\Spec.hs" 19 16 19 29
-                                   , SrcSpan "test\\Spec.hs" 19 29 19 30
+                                   [ SrcSpan "test//Spec.hs" 19 15 19 16
+                                   , SrcSpan "test//Spec.hs" 19 16 19 29
+                                   , SrcSpan "test//Spec.hs" 19 29 19 30
                                    ]
                                }
                              (Ident
                                 SrcSpanInfo
-                                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 16 19 29
+                                  { srcInfoSpan = SrcSpan "test//Spec.hs" 19 16 19 29
                                   , srcInfoPoints = []
                                   }
                                 "shouldSatisfy")))
                        (RightSection
                           SrcSpanInfo
-                            { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 31 19 37
+                            { srcInfoSpan = SrcSpan "test//Spec.hs" 19 31 19 37
                             , srcInfoPoints =
-                                [ SrcSpan "test\\Spec.hs" 19 31 19 32
-                                , SrcSpan "test\\Spec.hs" 19 36 19 37
+                                [ SrcSpan "test//Spec.hs" 19 31 19 32
+                                , SrcSpan "test//Spec.hs" 19 36 19 37
                                 ]
                             }
                           (QVarOp
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 32 19 34
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 19 32 19 34
                                , srcInfoPoints = []
                                }
                              (UnQual
                                 SrcSpanInfo
-                                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 32 19 34
+                                  { srcInfoSpan = SrcSpan "test//Spec.hs" 19 32 19 34
                                   , srcInfoPoints = []
                                   }
                                 (Symbol
                                    SrcSpanInfo
-                                     { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 32 19 34
+                                     { srcInfoSpan = SrcSpan "test//Spec.hs" 19 32 19 34
                                      , srcInfoPoints = []
                                      }
                                    "==")))
                           (Lit
                              SrcSpanInfo
-                               { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 35 19 36
+                               { srcInfoSpan = SrcSpan "test//Spec.hs" 19 35 19 36
                                , srcInfoPoints = []
                                }
                              (Int
                                 SrcSpanInfo
-                                  { srcInfoSpan = SrcSpan "test\\Spec.hs" 19 35 19 36
+                                  { srcInfoSpan = SrcSpan "test//Spec.hs" 19 35 19 36
                                   , srcInfoPoints = []
                                   }
                                 2
                                 "2"))))))
           ]))
+, UnGuardedRhs
+    SrcSpanInfo
+      { srcInfoSpan = SrcSpan "test//Spec.hs" 22 8 22 45
+      , srcInfoPoints = [ SrcSpan "test//Spec.hs" 22 8 22 9 ]
+      }
+    (App
+       SrcSpanInfo
+         { srcInfoSpan = SrcSpan "test//Spec.hs" 22 10 22 45
+         , srcInfoPoints = []
+         }
+       (App
+          SrcSpanInfo
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 22 10 22 22
+            , srcInfoPoints = []
+            }
+          (Var
+             SrcSpanInfo
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 22 10 22 12
+               , srcInfoPoints = []
+               }
+             (UnQual
+                SrcSpanInfo
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 22 10 22 12
+                  , srcInfoPoints = []
+                  }
+                (Ident
+                   SrcSpanInfo
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 22 10 22 12
+                     , srcInfoPoints = []
+                     }
+                   "it")))
+          (Lit
+             SrcSpanInfo
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 22 13 22 22
+               , srcInfoPoints = []
+               }
+             (String
+                SrcSpanInfo
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 22 13 22 22
+                  , srcInfoPoints = []
+                  }
+                "is test"
+                "is test")))
+       (Paren
+          SrcSpanInfo
+            { srcInfoSpan = SrcSpan "test//Spec.hs" 22 23 22 45
+            , srcInfoPoints =
+                [ SrcSpan "test//Spec.hs" 22 23 22 24
+                , SrcSpan "test//Spec.hs" 22 44 22 45
+                ]
+            }
+          (InfixApp
+             SrcSpanInfo
+               { srcInfoSpan = SrcSpan "test//Spec.hs" 22 24 22 44
+               , srcInfoPoints = []
+               }
+             (Paren
+                SrcSpanInfo
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 22 24 22 31
+                  , srcInfoPoints =
+                      [ SrcSpan "test//Spec.hs" 22 24 22 25
+                      , SrcSpan "test//Spec.hs" 22 30 22 31
+                      ]
+                  }
+                (InfixApp
+                   SrcSpanInfo
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 22 25 22 30
+                     , srcInfoPoints = []
+                     }
+                   (Lit
+                      SrcSpanInfo
+                        { srcInfoSpan = SrcSpan "test//Spec.hs" 22 25 22 26
+                        , srcInfoPoints = []
+                        }
+                      (Int
+                         SrcSpanInfo
+                           { srcInfoSpan = SrcSpan "test//Spec.hs" 22 25 22 26
+                           , srcInfoPoints = []
+                           }
+                         1
+                         "1"))
+                   (QVarOp
+                      SrcSpanInfo
+                        { srcInfoSpan = SrcSpan "test//Spec.hs" 22 27 22 28
+                        , srcInfoPoints = []
+                        }
+                      (UnQual
+                         SrcSpanInfo
+                           { srcInfoSpan = SrcSpan "test//Spec.hs" 22 27 22 28
+                           , srcInfoPoints = []
+                           }
+                         (Symbol
+                            SrcSpanInfo
+                              { srcInfoSpan = SrcSpan "test//Spec.hs" 22 27 22 28
+                              , srcInfoPoints = []
+                              }
+                            "+")))
+                   (Lit
+                      SrcSpanInfo
+                        { srcInfoSpan = SrcSpan "test//Spec.hs" 22 29 22 30
+                        , srcInfoPoints = []
+                        }
+                      (Int
+                         SrcSpanInfo
+                           { srcInfoSpan = SrcSpan "test//Spec.hs" 22 29 22 30
+                           , srcInfoPoints = []
+                           }
+                         1
+                         "1"))))
+             (QVarOp
+                SrcSpanInfo
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 22 32 22 42
+                  , srcInfoPoints =
+                      [ SrcSpan "test//Spec.hs" 22 32 22 33
+                      , SrcSpan "test//Spec.hs" 22 33 22 41
+                      , SrcSpan "test//Spec.hs" 22 41 22 42
+                      ]
+                  }
+                (UnQual
+                   SrcSpanInfo
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 22 32 22 42
+                     , srcInfoPoints =
+                         [ SrcSpan "test//Spec.hs" 22 32 22 33
+                         , SrcSpan "test//Spec.hs" 22 33 22 41
+                         , SrcSpan "test//Spec.hs" 22 41 22 42
+                         ]
+                     }
+                   (Ident
+                      SrcSpanInfo
+                        { srcInfoSpan = SrcSpan "test//Spec.hs" 22 33 22 41
+                        , srcInfoPoints = []
+                        }
+                      "shouldBe")))
+             (Lit
+                SrcSpanInfo
+                  { srcInfoSpan = SrcSpan "test//Spec.hs" 22 43 22 44
+                  , srcInfoPoints = []
+                  }
+                (Int
+                   SrcSpanInfo
+                     { srcInfoSpan = SrcSpan "test//Spec.hs" 22 43 22 44
+                     , srcInfoPoints = []
+                     }
+                   2
+                   "2")))))
 ]

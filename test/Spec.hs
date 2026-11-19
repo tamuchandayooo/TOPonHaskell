@@ -3,7 +3,7 @@ module Spec where
 import Test.Hspec
 
 main :: IO ()
-main = hspec $ spec
+main = hspec $ unagi
 
 kankeinaiKansu :: String -> String
 kankeinaiKansu str = "hikisuu:" ++ str 
@@ -14,6 +14,9 @@ unagi = describe "description" $ do
         1 + 1 `shouldBe` 2
 
 unagi2 :: Spec
-unagi = context "context" $ do
+unagi2 = context "context" $ do
     specify "test 2" $
         1 + 1 `shouldSatisfy` (== 2)
+
+unagi3 :: Spec
+unagi3 = it "is test" ((1 + 1) `shouldBe` 2)

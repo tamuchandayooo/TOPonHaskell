@@ -49,6 +49,7 @@ extractOneRhs ids decl =
                     | pack name == id -> Just rhs
                 _                     -> Nothing
 
+extractRhs :: [Text] -> [Decl l] -> [Rhs l]
 extractRhs ids decls = 
     concat $ map (extractOneRhs ids) decls
 
@@ -62,7 +63,11 @@ extractRhsFromPath path = do
 
 
 
-
+getExpFromRhs :: Rhs l -> Maybe (Exp l)
+getExpFromRhs rhs =
+  case rhs of
+    UnGuardedRhs _ exp -> Just exp
+    GuardedRhss  _ _   -> Nothing
 
 
 
