@@ -6,7 +6,17 @@ import Language.Haskell.Exts
 data TestInfo = TestInfo
   { testGroups    :: [Text]
   , testName      :: Text
-  , testBody      :: Text
-  , testLocation  :: Maybe SrcSpanInfo
+  , input         :: Text
+  , expected      :: Text
+  , assertion     :: Text
+  , testStartLine :: Int
+  , testEndLine   :: Int
   }
+  deriving (Show)
+
+data HspecStatement l
+  = Describe String (Exp l)
+  | Context  String (Exp l)
+  | It       String (Exp l)
+  | Specify  String (Exp l)
   deriving (Show)
