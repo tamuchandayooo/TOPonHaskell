@@ -36,6 +36,7 @@ library
       Domain.ModuleInfo
       Domain.ProjectContext
       Domain.StructureTree
+      Domain.TestInfo
       Domain.TestResult
       Infrastructure.CreateFiles
       Infrastructure.CreateTemplate
@@ -46,6 +47,7 @@ library
       Infrastructure.PackageYaml
       Infrastructure.ReadYaml
       Infrastructure.StackRunner
+      Infrastructure.TestAnalyzer
   other-modules:
       Paths_TOPonHaskell
   autogen-modules:
@@ -59,6 +61,7 @@ library
     , directory
     , filepath
     , haskell-src-exts
+    , pretty-show
     , process
     , req
     , text
@@ -83,6 +86,7 @@ executable TOPonHaskell-exe
     , directory
     , filepath
     , haskell-src-exts
+    , pretty-show
     , process
     , req
     , text
@@ -108,6 +112,7 @@ test-suite TOPonHaskell-test
     , directory
     , filepath
     , haskell-src-exts
+    , pretty-show
     , process
     , req
     , text
