@@ -1,2 +1,5 @@
 .stack-work/
 *~
+TOPonHaskell.cabal
+outputs/bibcli/*
+!outputs/bibcli/main.yaml

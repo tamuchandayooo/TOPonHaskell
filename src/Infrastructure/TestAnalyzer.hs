@@ -4,13 +4,12 @@ module Infrastructure.TestAnalyzer where
 
 import Data.Text (Text,pack)
 import Data.Maybe (mapMaybe)
-import Language.Haskell.Exts
-import Infrastructure.Logger (putErrorLog)
 import Text.Show.Pretty (ppShow)
-
+import Language.Haskell.Exts
 import Domain.TestInfo
-import Foreign (allocaArray, Xor (getXor))
-import Data.Yaml (ParseException(_anchorName))
+import Infrastructure.Logger (putErrorLog)
+import Infrastructure.FileManager (insertLine, insertLineInFile)
+
 
 ------------------------------------------------------------------------------------------------------
 
@@ -61,8 +60,6 @@ extractRhsFromPath path = do
         Left  err   -> putErrorLog (show err)
 
 ------------------------------------------------------------------------------------------------------
-
-
 
 getExpFromRhs :: Rhs l -> Either String (Exp l)
 getExpFromRhs (UnGuardedRhs _ ex) = Right ex
@@ -127,6 +124,8 @@ parseHspecStatement ex = do
         _ ->
             Left "failed parsing hspecStatement from exp"    
 
+-- ex     : Exp from Rhs
+-- groups : list for groups
 extractTests :: Exp SrcSpanInfo -> [String] -> [TestInfo]
 extractTests ex groups =
   case parseHspecStatement ex of
@@ -182,8 +181,17 @@ extractTestsFromPath path = do
     where
         oneTest r =
             case getExpFromRhs r of
-                Right ex -> putStrLn $ show (extractTests ex [])
+                Right ex -> putStrLn $ show $ (extractTests ex [])
                 Left  er -> putErrorLog (show er)
 
+insertInfo :: FilePath -> TestInfo -> IO ()
+insertInfo path info = do
+    insertLineInFile (testStartLine info) (infoTxt) path
+    where
+        infoTxt = "{-"
+               <> "input     : " <> (input info) <> "\n"
+               <> "expected  : " <> (expected info) <> "\n"
+               <> "assertion : " <> (assertion info) <> "\n"
+               <> "-}"
 
 ------------------------------------------------------------------------------------------------------
