@@ -4,7 +4,7 @@ module Application.LLMGeneration where
 import Data.Text(Text,pack)
 
 import Domain.LLMRequest
-import Infrastructure.FileOutput
+import Infrastructure.FileManager
 import Infrastructure.Logger
 
 ------------------------------------------------------------------------------------------------------

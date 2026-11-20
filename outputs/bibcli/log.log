@@ -1,9 +1,0 @@
-[2026-11-13 04:30:09][INFO]:There aren't "prompt.yaml" in the directory.
-[2026-11-13 04:30:09][INFO]:Created the files. Modify that if needed and retry.
-[2026-11-13 04:30:12][INFO]:Generating structure file ...
-[2026-11-13 04:31:12][INFO]:Are you satisfied with the result? [Y]es, [R]etry, [A]bort:
-[2026-11-13 04:33:12]>> Y
-[2026-11-13 04:33:12][INFO]:Creating File Structure ...
-[2026-11-13 04:33:15][INFO]:Generating acceptance test ...
-[2026-11-13 04:35:25][INFO]:Are you satisfied with the result? [Y]es, [R]etry, [A]bort:
-[2026-11-13 04:37:48]>> A

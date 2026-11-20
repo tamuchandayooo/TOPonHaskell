@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Infrastructure.FileOutput where
+module Infrastructure.FileManager where
 
 import Data.Text (Text,unpack)
 import qualified Data.Text as T
